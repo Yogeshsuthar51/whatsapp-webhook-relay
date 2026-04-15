@@ -1,0 +1,15 @@
+{
+  "name": "whatsapp-webhook-relay",
+  "version": "1.0.0",
+  "description": "Lightweight webhook relay for WhatsApp Cloud API – receives Meta webhooks and queues messages for local polling",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
