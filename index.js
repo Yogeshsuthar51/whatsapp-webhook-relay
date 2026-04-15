@@ -38,11 +38,24 @@ app.post("/webhook", (req, res) => {
         if (!value || !value.messages) continue;
 
         for (const message of value.messages) {
-          if (message.type !== "text") continue;
+          let text = null;
+
+          if (message.type === "text") {
+            text = message.text.body;
+          } else if (message.type === "interactive") {
+            const ir = message.interactive;
+            if (ir.type === "button_reply") {
+              text = ir.button_reply.title;
+            } else if (ir.type === "list_reply") {
+              text = ir.list_reply.title;
+            }
+          }
+
+          if (!text) continue;
 
           const item = {
             from: message.from,
-            text: message.text.body,
+            text,
             timestamp: message.timestamp,
             receivedAt: Date.now()
           };
